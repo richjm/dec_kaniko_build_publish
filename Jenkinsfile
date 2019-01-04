@@ -37,7 +37,7 @@ spec:
         stage('Run kaniko') {
             steps {
                 container('kaniko') {
-                    sh 'sleep 1'
+                    echo "hello"
                 }
                 
             }
