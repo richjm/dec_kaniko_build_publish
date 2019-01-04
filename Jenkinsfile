@@ -35,7 +35,7 @@ spec:
     }
     stages {
         stage('Build with Kaniko') {
-
+            steps {
       
         container(name: 'kaniko', shell: '/busybox/sh') {
            withEnv(['PATH+EXTRA=/busybox']) {
@@ -43,6 +43,7 @@ spec:
             /kaniko/executor --context `pwd` --destination stuartcbrown/hello-kaniko:latest
             '''
            }
+        }
         }
       }
     }
