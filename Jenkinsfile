@@ -34,13 +34,17 @@ spec:
         }
     }
     stages {
-        stage('Run kaniko') {
-            steps {
-                container('kaniko') {
-                    echo "hello"
-                }
-                
-            }
+        stage('Build with Kaniko') {
+
+       git 'https://github.com/cb-jeffduska/simple-docker-example.git'
+        container(name: 'kaniko', shell: '/busybox/sh') {
+           withEnv(['PATH+EXTRA=/busybox']) {
+            sh '''#!/busybox/sh
+            /kaniko/executor --context `pwd` --destination stuartcbrown/hello-kaniko:latest
+            '''
+           }
         }
+      }
+    }
     }
 }
